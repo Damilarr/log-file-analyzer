@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --color-brand-red: #ff3366;
+  --color-brand-cyan: #00f0ff;
+  --color-brand-purple: #b026ff;
+  --color-brand-yellow: #fffb00;
+  
+  --color-panel: #111111;
+  --color-surface: #1a1a1a;
+  --color-base: #060606;
+}
+
+body {
+  background-color: var(--color-base);
+  color: #eeeeee;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.glow-text {
+  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+}
+
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 red;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+.glitch::after {
+  left: -2px;
+  text-shadow: -1px 0 blue;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(28px, 9999px, 83px, 0); }
+  20% { clip: rect(35px, 9999px, 8px, 0); }
+  40% { clip: rect(75px, 9999px, 52px, 0); }
+  60% { clip: rect(10px, 9999px, 78px, 0); }
+  80% { clip: rect(41px, 9999px, 51px, 0); }
+  100% { clip: rect(4px, 9999px, 96px, 0); }
+}
+
+.noise-bg {
+  position: relative;
+}
+.noise-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 240, 255, 0.4), transparent);
+  opacity: 0.3;
+  animation: scan 4s linear infinite;
+  pointer-events: none;
+  z-index: 20;
+}
+
+@keyframes scan {
+  from { top: -10px; }
+  to { top: 100%; }
+}
