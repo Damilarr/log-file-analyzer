@@ -1,73 +1,60 @@
-# React + TypeScript + Vite
+# Log File Analyzer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fast, browser-based log file analyzer that is built to handle massive datasets. It is designed to quickly process gigabytes of log lines without freezing your browser, and it keeps all of your data 100% local and private.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Fast Background Processing:** Uses Web Workers to process large log files in the background, keeping the user interface completely responsive.
+- **Handles Huge Files:** Uses IndexedDB (Dexie) to store and query log data on your hard drive. This prevents your browser from crashing when loading very large files (like 1GB+ logs).
+- **Smooth Scrolling:** Uses virtualized lists to only render the rows visible on your screen. Whether you have 100 or 1,000,000 logs, scrolling remains perfectly smooth.
+- **Advanced Search & Filtering:** Filter logs by severity level (ERROR, WARN, INFO, DEBUG) or search using specific text and regular expressions.
+- **100% Local Privacy:** Everything runs directly in your browser. There is no server, no API keys, and your log files are never uploaded anywhere.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework:** React + Vite
+- **Styling:** Tailwind CSS
+- **Background Processing:** Web Workers + Comlink
+- **Storage:** Dexie (IndexedDB)
+- **Rendering:** React Virtuoso
+- **Icons:** Lucide-React
 
-## Expanding the ESLint configuration
+## 📦 Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. Requirements
+Ensure you have Node.js installed (v18 or higher is recommended).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 2. Setup
+Clone the repository and install the dependencies:
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 3. Run Locally
+Start the development server:
+```bash
+npm run dev
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 4. Build for Production
+Create an optimized production build:
+```bash
+npm run build
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 💻 How to Use
+1. Open the application in your browser.
+2. Under **DATA INGEST**, upload a server log file. The analyzer expects standard log formats like `[TIMESTAMP] LEVEL: Message`.
+3. Click **INIT ANALYSIS** to start processing the file.
+4. Once completed, use the **FILTERS & TOOLS** section to find what you need:
+   - Click the severity tags (ERROR, WARN, INFO, DEBUG) to show only those logs.
+   - Use the **QUERY STRING** input to search for text or use a Regular Expression. Click **APPLY FILTERS** or press Enter.
+   - Click **EXTRACT DATA** to download a text file of your filtered logs.
+
+## 📝 Log Format Example
+The application works best with structured logs that look like this:
+```text
+[2026-02-18 10:30:39] ERROR: Unhandled exception occurred | user_id=8921 | ip=11.35.150.152
+[2026-02-18 13:32:56] DEBUG: Rendering component tree | user_id=8988 | ip=223.192.123.176
+[2026-02-18 14:43:47] INFO: Service started successfully | user_id=7655 | ip=246.25.114.145
 ```
