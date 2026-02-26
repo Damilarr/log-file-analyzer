@@ -28,6 +28,9 @@ const logProcessor = {
   async getLogCount() {
     return await db.logs.count();
   },
+  async clearLogs() {
+    await db.logs.clear();
+  },
   async processLog(fileName: string) {
     console.log("Processing log file:", fileName);
     return `Finished Processing ${fileName} at ${new Date().toLocaleTimeString()}`;

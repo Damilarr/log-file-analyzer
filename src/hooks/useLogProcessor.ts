@@ -3,7 +3,7 @@ import * as Comlink from "comlink";
 import type { LogEntry } from "../workers/log-worker";
 
 export function useLogProcessor() {
-  const [status, setStatus] = useState("SYSTEM_READY");
+  const [status, setStatus] = useState("Ready");
   const [processing, setProcessing] = useState(false);
   const [isFiltering, setIsFiltering] = useState(false);
   const [logFile, setLogFile] = useState<File | null>(null);
@@ -27,7 +27,9 @@ export function useLogProcessor() {
   const startProcessing = async () => {
     if (!logFile || !apiRef.current) return;
     setProcessing(true);
-    setStatus("INGESTING_DATA...");
+    setStatus("Loading file...");
+    
+    await apiRef.current.clearLogs();
     
     const stream = logFile.stream();
     const reader = stream.getReader();
@@ -38,7 +40,7 @@ export function useLogProcessor() {
     }
     await apiRef.current.finalize();
     setProcessing(false);
-    setStatus("ANALYSIS_COMPLETE");
+    setStatus("Analysis Complete");
   };
 
   const applyFilters = async (filter: string, search: string) => {
@@ -62,10 +64,10 @@ export function useLogProcessor() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `sys_logs_extract_${new Date().getTime()}.log`;
+    a.download = `logs_export_${new Date().getTime()}.log`;
     a.click();
     URL.revokeObjectURL(url);
-    setStatus("DATA_EXPORTED");
+    setStatus("Data Exported");
   };
 
   return {

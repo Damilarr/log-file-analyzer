@@ -22,7 +22,7 @@ export const FilterTools = ({
 }: FilterToolsProps) => (
   <RetroPanel title="FILTERS_&_TOOLS" icon={Crosshair} className="p-4 gap-4">
     <div className="flex flex-col gap-3 font-mono">
-      <div className="text-xs text-[#666]">TARGET_LEVEL</div>
+      <div className="text-xs text-[#666]">LOG_LEVEL</div>
       <div className="grid grid-cols-2 gap-2">
         {['ALL', 'ERROR', 'WARN', 'INFO', 'DEBUG'].map(lvl => (
           <button
@@ -42,12 +42,12 @@ export const FilterTools = ({
     </div>
     
     <div className="flex flex-col gap-3 font-mono mt-2">
-      <div className="text-xs text-[#666]">QUERY_STRING</div>
+      <div className="text-xs text-[#666]">SEARCH_QUERY</div>
       <div className="relative">
         <Search className="absolute left-2 top-2 w-4 h-4 text-[#666]" />
         <input
           type="text"
-          placeholder="REGEX_OR_TEXT..."
+          placeholder="SEARCH_TEXT_OR_REGEX..."
           className="w-full bg-[#111] border border-[#333] pl-8 pr-3 py-1.5 text-sm text-brand-cyan font-mono focus:outline-none focus:border-brand-cyan transition-colors"
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && onApplyFilters()}
@@ -71,7 +71,7 @@ export const FilterTools = ({
       icon={Download}
       onClick={onExport}
     >
-      EXTRACT_DATA
+      EXPORT_DATA
     </NeonButton>
   </RetroPanel>
 );

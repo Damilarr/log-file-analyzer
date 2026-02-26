@@ -24,15 +24,15 @@ export const TelemetryStream = ({
   const virtuosoRef = useRef<any>(null);
 
   return (
-    <RetroPanel title="TELEMETRY_STREAM" icon={Cpu} className="flex-1 min-h-[500px] relative">
+    <RetroPanel title="LOG_STREAM" icon={Cpu} className="flex-1 min-h-[500px] relative">
        {(processing || isFiltering) && (
          <div className="absolute inset-0 z-50 bg-[#060606]/80 backdrop-blur-sm flex flex-col items-center justify-center font-mono gap-4 text-brand-cyan">
            <div className="w-16 h-16 border-4 border-brand-cyan border-t-transparent rounded-full animate-spin glow-text"></div>
            <div className="text-xl tracking-widest glow-text">
-             {processing ? "INGESTING_DATA. . ." : "SCANNING_MATRIX. . ."}
+             {processing ? "LOADING_DATA. . ." : "SEARCHING. . ."}
            </div>
            <div className="text-sm text-[#888] animate-pulse">
-             {processing ? "Parsing massive log signatures" : "Searching telemetry... please wait"}
+             {processing ? "Processing logs... please wait" : "Searching logs... please wait"}
            </div>
          </div>
        )}
@@ -55,7 +55,7 @@ export const TelemetryStream = ({
        ) : (
           <div className="flex flex-col items-center justify-center h-full text-[#444] font-mono gap-4">
             <TerminalIcon className="w-12 h-12 opacity-50" />
-            <div>SYSTEM_IDLE // NO_DATA_STREAM</div>
+            <div>SYSTEM_IDLE // NO_DATA_TO_DISPLAY</div>
           </div>
        )}
     </RetroPanel>

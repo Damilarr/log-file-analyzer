@@ -70,7 +70,9 @@ function App() {
             logFile={logFile}
             processing={processing}
             onFileChange={handleFileChange}
-            onStartProcessing={startProcessing}
+            onStartProcessing={() => {
+              startProcessing().then(() => applyFilters(filter, search));
+            }}
           />
           
           <FilterTools 

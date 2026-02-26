@@ -20,14 +20,14 @@ export const Header = ({ status, processing, recordCount }: HeaderProps) => (
         <Terminal className="text-brand-cyan w-6 h-6 z-10" />
       </div>
       <div>
-        <h1 className="text-2xl font-mono text-brand-cyan font-bold tracking-[0.2em] glow-text glitch" data-text="LOG_NEXUS">LOG_NEXUS</h1>
-        <p className="font-mono text-xs text-[#888] tracking-widest mt-1">v.1.0 // ADVANCED_TELEM_SYS</p>
+        <h1 className="text-2xl font-mono text-brand-cyan font-bold tracking-[0.2em] glow-text glitch" data-text="LOG_ANALYZER">LOG_ANALYZER</h1>
+        <p className="font-mono text-xs text-[#888] tracking-widest mt-1">v.1.0 // LOG_VIEWER</p>
       </div>
     </div>
 
     <div className="flex items-center gap-6 text-xs font-mono">
        <div className="flex flex-col items-end">
-         <span className="text-[#666]">SYS_STATUS</span>
+         <span className="text-[#666]">STATUS</span>
          <span className={cn(
            "font-bold",
            processing ? "text-brand-yellow animate-pulse" : "text-brand-cyan"
